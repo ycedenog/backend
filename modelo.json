@@ -1,0 +1,51 @@
+{
+    "config":{
+        "locale": "en"
+    },
+    "model": {
+        "type": "Object",
+        "value": {
+            "id":{
+                "type": "incrementNumber",
+                "options":{
+                    "from": 1
+                }
+            },
+            "cliente":{
+                "type": "Object",
+                "value": {
+                    "firstName":{
+                        "type": "faker",
+                        "value": "name.firstName"
+                    },
+                    "lastName": {
+                        "type": "faker",
+                        "value": "name.lastName"
+                    }
+                }
+            },
+            "fechainicioPrestamo":{
+                "type": "faker",
+                "value": "date.between",
+                "options": ["2022-01-01","2022-03-30"]
+            },
+            "fechafinPrestamo":{
+                "type": "faker",
+                "value": "date.between",
+                "options": ["2022-04-01","2022-06-30"]
+            },
+            "libro_prestado": {
+              "type": "randomNumberBetween",
+              "value": [1, 20]
+            },
+            "estado_cliente": {
+                "type": "randomElementInArray",
+                "value": ["Multa por devolución", "Sin multa"]
+            },
+            "type": {
+                "type": "Literal",
+                "value": "Im just a String"
+            }
+        }
+    }
+}
