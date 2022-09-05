@@ -1,0 +1,139 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Libros, Autores, Préstamos API - OpenAPI 3.0",
+    "description": "API que obtiene datos de diferentes modelos a partir de base de datos SQL y NOSQL.",
+    "contact": {
+      "email": "yonmaced@espol.edu.ec"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "paths": {
+    "/libro": {
+      "post": {
+        "tags": [
+          "libro"
+        ],
+        "summary": "Agrega un nuevo libro a la base de datos",
+        "description": "Almacena un libro con sus campos respectivo a la base de datos relacional",
+        "requestBody": {
+          "description": "Crea una nueva instancia de libro y la almacena",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operacion sastifactoria"
+          },
+          "400": {
+            "description": "Ingreso invalido"
+          }
+        }
+      }
+    },
+    "/libros/{id}": {
+      "get": {
+        "tags": [
+          "libro"
+        ],
+        "summary": "Obtiene todos los libros",
+        "description": "Obtiene los libros en formato json.",
+        "operationId": "findPetsByStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Identificador autoincremental para cada libro",
+            "required": false,
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operacion exitosa"
+          },
+          "400": {
+            "description": "Valor de ID invalido"
+          }
+        }
+      }
+    },
+    "/libros/nombre/apellido": {
+      "get": {
+        "tags": [
+          "libro"
+        ],
+        "summary": "Encuentra libros por su autor",
+        "description": "Se pueden proveer dos parámetros opcionales para obtener un libro",
+        "operationId": "findPetsByTags",
+        "parameters": [
+          {
+            "name": "nombre apellido",
+            "in": "query",
+            "description": "Nombres y apellidos para encontrar los libros de un autor",
+            "required": false,
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operacion exitosa"
+          },
+          "400": {
+            "description": "Valor inválido para el nombre o el apellido"
+          }
+        },
+        "security": [
+
+        ]
+      }
+    },
+    "/cliente/prestamo/id": {
+      "get": {
+        "tags": [
+          "libro"
+        ],
+        "summary": "Encuentra los libros prestados por cliente",
+        "description": "Retorna las personas que han prestado aque libro.",
+        "operationId": "getPetById",
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
